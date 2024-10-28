@@ -32,20 +32,17 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
+                    // Set the project directory where package.json is located
                     def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-helloworld-master\\react-helloworld-master"
                     
+                    // Navigate to the project directory for installation
                     dir(projectDir) {
+                        // Check Node.js and npm versions to ensure they're installed
                         bat '"C:\\Program Files\\nodejs\\node.exe" -v'
-                        bat '"C:\\Program Files\\nodejs\\npm.cmd" -v'
+                        bat '"C:\\Program Files\\nodejs\\npm.cmd" -v' // Use npm.cmd for Windows
                         
-                        // Attempt to install dependencies and handle errors gracefully
-                        bat '''
-                        call "C:\\Program Files\\nodejs\\npm.cmd" install --legacy-peer-deps || (
-                            echo Failed to install some dependencies. Trying again without the problematic package...
-                            call "C:\\Program Files\\nodejs\\npm.cmd" install --no-package-lock --legacy-peer-deps
-                        )
-                        || exit 1
-                        '''
+                        // Install dependencies using npm install with --legacy-peer-deps
+                        bat '"C:\\Program Files\\nodejs\\npm.cmd" install --legacy-peer-deps || exit 1'
                     }
                 }
             }
@@ -57,7 +54,10 @@ pipeline {
                     def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-helloworld-master\\react-helloworld-master"
                     
                     dir(projectDir) {
+                        // Run the build command for the React application
                         bat '"C:\\Program Files\\nodejs\\npm.cmd" run build'
+                        
+                        // Verify build output
                         bat 'dir build'
                     }
                 }
@@ -70,8 +70,13 @@ pipeline {
                     def deployDir = "C:\\Users\\Dell-Lap\\Downloads\\node\\"
                     def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-helloworld-master\\react-helloworld-master"
 
+                    // Create the deployment directory if it doesn't exist
                     bat "if not exist \"${deployDir}\" mkdir \"${deployDir}\""
+
+                    // Copy the built files to the deployment directory
                     bat "xcopy /S /I /Y \"${projectDir}\\build\\*\" \"${deployDir}\""
+                    
+                    // List the contents of the deployment directory to verify deployment
                     bat "dir \"${deployDir}\""
                 }
             }
@@ -84,3 +89,6 @@ pipeline {
         }
     }
 }
+
+
+

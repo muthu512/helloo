@@ -32,15 +32,17 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 script {
+                    // Set the project directory where package.json is located
                     def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-helloworld-master\\react-helloworld-master"
                     
+                    // Navigate to the project directory for installation
                     dir(projectDir) {
-                        // Verify Node.js and npm versions
+                        // Check Node.js and npm versions to ensure they're installed
                         bat '"C:\\Program Files\\nodejs\\node.exe" -v'
                         bat '"C:\\Program Files\\nodejs\\npm.cmd" -v' // Use npm.cmd for Windows
                         
-                        // Install dependencies
-                        bat '"C:\\Program Files\\nodejs\\npm.cmd" install'
+                        // Install dependencies using npm install with --legacy-peer-deps
+                        bat '"C:\\Program Files\\nodejs\\npm.cmd" install --legacy-peer-deps || exit 1'
                     }
                 }
             }

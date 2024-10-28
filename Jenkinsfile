@@ -20,7 +20,7 @@ pipeline {
             steps {
                 script {
                     // Set the project directory where package.json is located
-                    def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-hello-world-master\\react-hello-world-master"
+                    def projectDir = ""C:\\Users\\Dell-Lap\\Downloads\\react-helloworld-master\\react-helloworld-master""
                     
                     // Navigate to the project directory and check for package.json
                     dir(projectDir) {
@@ -34,7 +34,7 @@ pipeline {
             steps {
                 script {
                     // Set the project directory where package.json is located
-                    def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-hello-world-master\\react-hello-world-master"
+                    def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-hello-worldmaster\\react-helloworld-master"
                     
                     // Navigate to the project directory for installation
                     dir(projectDir) {
@@ -53,7 +53,7 @@ pipeline {
             steps {
                 script {
                     // Set the project directory where package.json is located
-                    def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-hello-world-master\\react-hello-world-master"
+                    def projectDir = "C:\\Users\\Dell-Lap\\Downloads\\react-hello-worldmaster\\react-helloworld-master"
                     
                     // Navigate to the project directory for building
                     dir(projectDir) {
@@ -72,7 +72,7 @@ pipeline {
                     // Create the deployment directory if it doesn't exist
                     bat 'if not exist "C:\\Users\\Dell-Lap\\Downloads\\node\\" mkdir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
                     // Copy the built files to the deployment directory
-                    bat 'xcopy /S /I /Y "C:\\Users\\Dell-Lap\\Downloads\\react-hello-world-master\\react-hello-world-master\\build\\*" "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
+                    bat 'xcopy /S /I /Y "C:\\Users\\Dell-Lap\\Downloads\\react-hello-worldmaster\\react-hello-worldmaster\\build\\*" "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
                     // List the contents of the deployment directory to verify deployment
                     bat 'dir "C:\\Users\\Dell-Lap\\Downloads\\node\\"'
                 }
